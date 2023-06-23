@@ -79,6 +79,7 @@ export default function App() {
             title='Magreza'
             text='Está menor que 18.5'
             result={imc <= 18.5 ? imc : 0}
+            bgColor={imc <= 18.5 ? '#a0adb5' : '#5c5c5c'}
           >
             <SimpleLineIcons name="dislike" size={40} color="#000" />
           </Card>
@@ -86,6 +87,7 @@ export default function App() {
             title='Normal'
             text='Está entre 18.5 e 24.9'
             result={imc >= 18.5 && imc <= 24.9 ? imc : 0}
+            bgColor={imc >= 18.5 && imc <= 24.9 ? '#0db675' : '#5c5c5c'}
           >
             <SimpleLineIcons name="like" size={40} color="#000" />
           </Card>
@@ -93,6 +95,7 @@ export default function App() {
             title='Sobrepeso'
             text='Está entre 25 e 29.9'
             result={imc >= 25 && imc <= 29.9 ? imc : 0}
+            bgColor={imc >= 25 && imc <= 29.9 ? '#e6b741' : '#5c5c5c'}
           >
             <SimpleLineIcons name="dislike" size={40} color="#000" />
           </Card>
@@ -100,6 +103,7 @@ export default function App() {
             title='Obesidade'
             text='Está maior que 30'
             result={imc >= 30 ? imc : 0}
+            bgColor={imc >= 30 ? '#ca4a49' : '#5c5c5c'}
           >
             <SimpleLineIcons name="dislike" size={40} color="#000" />
           </Card>
