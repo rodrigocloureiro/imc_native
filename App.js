@@ -54,6 +54,7 @@ export default function App() {
           keyboardType='numeric'
           value={String(weight)}
           onChangeText={value => handleWeight(value)}
+          theme={{colors: {onSurfaceVariant: '#ffffffde'}}}
         />
         <TextInput
           textColor='#fff'
@@ -66,6 +67,7 @@ export default function App() {
           keyboardType='numeric'
           value={String(height)}
           onChangeText={value => handleHeight(value)}
+          theme={{colors: {onSurfaceVariant: '#ffffffde'}}}
         />
         <Button
           style={styles.button}
@@ -127,6 +129,7 @@ const styles = StyleSheet.create({
   },
   title: {
     color: '#ffffffde',
+    fontWeight: '700',
   },
   text: {
     color: '#ffffffde',
