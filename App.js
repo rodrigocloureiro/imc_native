@@ -1,6 +1,7 @@
 import { StyleSheet, View, SafeAreaView } from "react-native";
 import { Text, TextInput, Button } from "react-native-paper";
 import Card from "./components/Card";
+import { SimpleLineIcons } from '@expo/vector-icons';
 
 export default function App() {
   return (
@@ -42,9 +43,32 @@ export default function App() {
         >
           Calcular
         </Button>
-        <Card
-          text='Magreza'
-        />
+        <View style={styles.cards}>
+          <Card
+            title='Magreza'
+            text='O IMC está menor que 18.5'
+          >
+            <SimpleLineIcons name="dislike" size={40} color="#000" />
+          </Card>
+          <Card
+            title='Normal'
+            text='O IMC está entre 18.5 e 24.9'
+          >
+            <SimpleLineIcons name="like" size={40} color="#000" />
+          </Card>
+          <Card
+            title='Sobrepeso'
+            text='O IMC está entre 25 e 29.9'
+          >
+            <SimpleLineIcons name="dislike" size={40} color="#000" />
+          </Card>
+          <Card
+            title='Obesidade'
+            text='O IMC está maior que 30'
+          >
+            <SimpleLineIcons name="dislike" size={40} color="#000" />
+          </Card>
+        </View>
       </View>
     </SafeAreaView>
   );
@@ -74,5 +98,11 @@ const styles = StyleSheet.create({
     width: '100%',
     borderRadius: 5,
     marginVertical: 20,
+  },
+  cards: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
+    gap: 10,
   },
 });
