@@ -10,6 +10,7 @@ export default function App() {
   const [ imc, setImc ] = useState(0);
 
   const handleWeight = (value) => {
+    value.includes(',') ? value = value.replaceAll(',', '.') : null;
     if(isNaN(value) || value === '') {
       setWeight('');
     } else {
@@ -18,6 +19,7 @@ export default function App() {
   };
 
   const handleHeight = (value) => {
+    value.includes(',') ? value = value.replaceAll(',', '.') : null;
     if(isNaN(value) || value === '') {
       setHeight('');
     } else {
@@ -79,7 +81,7 @@ export default function App() {
             title='Magreza'
             text='Está menor que 18.5'
             result={imc <= 18.5 ? imc : 0}
-            bgColor={imc <= 18.5 ? '#a0adb5' : '#5c5c5c'}
+            bgColor={imc !== 0 && imc <= 18.5 ? '#a0adb5' : '#5c5c5c'}
           >
             <SimpleLineIcons name="dislike" size={40} color="#000" />
           </Card>
