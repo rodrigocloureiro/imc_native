@@ -5,7 +5,8 @@ import { SimpleLineIcons } from '@expo/vector-icons';
 import { useState, useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-// Documentaão eas build
+// Documentação eas build
+// https://github.com/expo/eas-cli#enforcing-eas-cli-version-for-your-project
 // https://docs.expo.dev/build/setup/
 // https://docs.expo.dev/develop/user-interface/app-icons/
 
