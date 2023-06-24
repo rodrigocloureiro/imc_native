@@ -19,8 +19,8 @@ export default function App() {
       const savedWeight = await AsyncStorage.getItem("@weight") || "";
       const savedHeight = await AsyncStorage.getItem("@height") || "";
       const savedIMC = await AsyncStorage.getItem("@imc") || "0";
-      setWeight(parseFloat(savedWeight));
-      setHeight(parseFloat(savedHeight));
+      setWeight(savedWeight);
+      setHeight(savedHeight);
       setImc(parseFloat(savedIMC));
     })();
   }, []);
@@ -60,6 +60,19 @@ export default function App() {
     }
     setImc(parseFloat(imc.toFixed(2)));
     Keyboard.dismiss();
+  };
+
+  const clearInputs = async () => {
+    setWeight("");
+    setHeight("");
+    setImc("0");
+    try {
+      await AsyncStorage.setItem("@weight", "");
+      await AsyncStorage.setItem("@height", "");
+      await AsyncStorage.setItem("@imc", "0");
+    } catch(error) {
+      console.log("Error: ", error);
+    }
   };
 
   return (
@@ -104,21 +117,34 @@ export default function App() {
           }}
           theme={{colors: {onSurfaceVariant: '#ffffffde'}}}
         />
-        <Button
-          style={styles.button}
-          mode='contained'
-          buttonColor='#2587a8'
-          textColor='#ffffffde'
-          onPress={handleCalculate}
-        >
-          Calcular
-        </Button>
+        <View style={styles.buttons}>
+          <Button
+            style={styles.button}
+            mode='contained'
+            buttonColor='#2587a8'
+            textColor='#ffffffde'
+            onPress={handleCalculate}
+          >
+            Calcular
+          </Button>
+          {(weight && height && imc > 0) &&
+            <Button
+              style={styles.button}
+              mode='contained'
+              buttonColor='#2587a8'
+              textColor='#ffffffde'
+              onPress={clearInputs}
+            >
+              Limpar
+            </Button>
+          }
+        </View>
         <View style={styles.cards}>
           <Card
             title='Magreza'
             text='Está menor que 18.5'
             result={imc <= 18.5 ? imc : 0}
-            bgColor={imc !== 0 && imc <= 18.5 ? '#a0adb5' : '#5c5c5c'}
+            bgColor={imc > 0 && imc <= 18.5 ? '#a0adb5' : '#5c5c5c'}
           >
             <SimpleLineIcons name="dislike" size={40} color="#000" />
           </Card>
@@ -174,10 +200,13 @@ const styles = StyleSheet.create({
     width: '100%',
     backgroundColor: 'transparent',
   },
-  button: {
+  buttons: {
     width: '100%',
+    marginVertical: 10,
+  },
+  button: {
     borderRadius: 5,
-    marginVertical: 20,
+    marginVertical: 10,
   },
   cards: {
     flexDirection: 'row',
