@@ -28,28 +28,28 @@ export default function App() {
   const handleWeight = async (value) => {
     value.includes(',') ? value = value.replaceAll(',', '.') : null;
     if(isNaN(value) || value === '') {
-      setWeight('');
+      setWeight(value.slice(0, value.length-1));
     } else {
       try {
         await AsyncStorage.setItem("@weight", value.toString());
       } catch(error) {
         console.log("Error: ", error);
       }
-      setWeight(value);
+      // setWeight(value);
     }
   };
 
   const handleHeight = async (value) => {
     value.includes(',') ? value = value.replaceAll(',', '.') : null;
     if(isNaN(value) || value === '') {
-      setHeight('');
+      setHeight(value.slice(0, value.length-1));
     } else {
       try {
         await AsyncStorage.setItem("@height", value.toString());
       } catch (error) {
         console.log(error);
       }
-      setHeight(value);
+      // setHeight(value);
     }
   };
 
@@ -84,7 +84,10 @@ export default function App() {
           underlineColor='#ccc'
           keyboardType='numeric'
           value={String(weight)}
-          onChangeText={value => handleWeight(value)}
+          onChangeText={value => {
+            setWeight(value);
+            handleWeight(value);
+          }}
           theme={{colors: {onSurfaceVariant: '#ffffffde'}}}
         />
         <TextInput
@@ -97,7 +100,10 @@ export default function App() {
           underlineColor='#ccc'
           keyboardType='numeric'
           value={String(height)}
-          onChangeText={value => handleHeight(value)}
+          onChangeText={value => {
+            setHeight(value);
+            handleHeight(value);
+          }}
           theme={{colors: {onSurfaceVariant: '#ffffffde'}}}
         />
         <Button
