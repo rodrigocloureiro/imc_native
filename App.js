@@ -4,6 +4,10 @@ import Card from "./components/Card";
 import { SimpleLineIcons } from '@expo/vector-icons';
 import { useState } from "react";
 
+// Documentaão eas build
+// https://docs.expo.dev/build/setup/
+// https://docs.expo.dev/develop/user-interface/app-icons/
+
 export default function App() {
   const [ weight, setWeight ] = useState('');
   const [ height, setHeight ] = useState('');
