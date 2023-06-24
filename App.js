@@ -26,7 +26,6 @@ export default function App() {
   }, []);
 
   const handleWeight = async (value) => {
-    value.includes(',') ? value = value.replaceAll(',', '.') : null;
     if(isNaN(value) || value === '') {
       setWeight(value.slice(0, value.length-1));
     } else {
@@ -39,7 +38,6 @@ export default function App() {
   };
 
   const handleHeight = async (value) => {
-    value.includes(',') ? value = value.replaceAll(',', '.') : null;
     if(isNaN(value) || value === '') {
       setHeight(value.slice(0, value.length-1));
     } else {
@@ -96,7 +94,7 @@ export default function App() {
           keyboardType='numeric'
           value={String(weight)}
           onChangeText={value => {
-            setWeight(value);
+            setWeight(value.includes(',') ? value = value.replace(',', '.') : value);
             handleWeight(value);
           }}
           theme={{colors: {onSurfaceVariant: '#ffffffde'}}}
@@ -112,7 +110,7 @@ export default function App() {
           keyboardType='numeric'
           value={String(height)}
           onChangeText={value => {
-            setHeight(value);
+            setHeight(value.includes(',') ? value = value.replace(',', '.') : value);
             handleHeight(value);
           }}
           theme={{colors: {onSurfaceVariant: '#ffffffde'}}}
