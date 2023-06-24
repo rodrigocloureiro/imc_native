@@ -35,7 +35,6 @@ export default function App() {
       } catch(error) {
         console.log("Error: ", error);
       }
-      // setWeight(value);
     }
   };
 
@@ -49,7 +48,6 @@ export default function App() {
       } catch (error) {
         console.log(error);
       }
-      // setHeight(value);
     }
   };
 
