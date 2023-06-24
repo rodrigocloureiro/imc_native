@@ -2,7 +2,8 @@ import { StyleSheet, View, SafeAreaView, Keyboard } from "react-native";
 import { Text, TextInput, Button } from "react-native-paper";
 import Card from "./components/Card";
 import { SimpleLineIcons } from '@expo/vector-icons';
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 // Documentaão eas build
 // https://docs.expo.dev/build/setup/
@@ -13,26 +14,52 @@ export default function App() {
   const [ height, setHeight ] = useState('');
   const [ imc, setImc ] = useState(0);
 
-  const handleWeight = (value) => {
+  useEffect(() => {
+    (async () => {
+      const savedWeight = await AsyncStorage.getItem("@weight") || "";
+      const savedHeight = await AsyncStorage.getItem("@height") || "";
+      const savedIMC = await AsyncStorage.getItem("@imc") || "0";
+      setWeight(parseFloat(savedWeight));
+      setHeight(parseFloat(savedHeight));
+      setImc(parseFloat(savedIMC));
+    })();
+  }, []);
+
+  const handleWeight = async (value) => {
     value.includes(',') ? value = value.replaceAll(',', '.') : null;
     if(isNaN(value) || value === '') {
       setWeight('');
     } else {
+      try {
+        await AsyncStorage.setItem("@weight", value.toString());
+      } catch(error) {
+        console.log("Error: ", error);
+      }
       setWeight(value);
     }
   };
 
-  const handleHeight = (value) => {
+  const handleHeight = async (value) => {
     value.includes(',') ? value = value.replaceAll(',', '.') : null;
     if(isNaN(value) || value === '') {
       setHeight('');
     } else {
+      try {
+        await AsyncStorage.setItem("@height", value.toString());
+      } catch (error) {
+        console.log(error);
+      }
       setHeight(value);
     }
   };
 
-  const handleCalculate = () => {
+  const handleCalculate = async () => {
     const imc = (weight / (height*height));
+    try {
+      await AsyncStorage.setItem("@imc", imc.toFixed(2));
+    } catch (error) {
+      console.log(error);
+    }
     setImc(parseFloat(imc.toFixed(2)));
     Keyboard.dismiss();
   };
