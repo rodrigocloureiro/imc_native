@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "imc_native",
+    "name": "IMC",
     "slug": "imc_native",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -9,22 +9,29 @@
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#242424"
     },
     "assetBundlePatterns": [
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "imcNativeIOS"
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/app_icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.rodrigocloureiro.imc_native"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "8acb399c-3764-44cf-bffb-55344650e0ac"
+      }
     }
   }
 }
